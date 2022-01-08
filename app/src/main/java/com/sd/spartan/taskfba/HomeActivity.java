@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.sd.spartan.taskfba.fragment.SignInFrag;
 import com.sd.spartan.taskfba.fragment.SignUpFrag;
+import com.sd.spartan.taskfba.fragment.UserFrag;
 
 public class HomeActivity extends AppCompatActivity implements OnIntent {
 
@@ -16,6 +17,12 @@ public class HomeActivity extends AppCompatActivity implements OnIntent {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        UserFrag subFragment = new UserFrag();
+        transaction.replace(R.id.frame_layout, subFragment,"user_all");
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
 
