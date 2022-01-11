@@ -51,21 +51,21 @@ public class UserFrag extends Fragment {
     private FloatingActionButton mFabBtn ;
     private SwitchCompat switchCompat ;
 
-    private DatabaseReference DBRef, userRef, taskRef;
-    private String currentUserId ;
+    private DatabaseReference DBRef, mUserRef, mTaskRef;
+    private String mCurrentUserId;
 
-    private List<User> userList ;
-    UserListAdapter userListAdapter ;
-    private OnIntent onIntent ;
+    private List<User> mUserList;
+    UserListAdapter mUserListAdapter;
+    private OnIntent mOnIntent;
 
     private MaterialAlertDialogBuilder materialAlertDialogBuilder ;
-    private AlertDialog dialog ;
+    private AlertDialog mAlertDialog;
 
 
     public UserFrag() {
     }
     public void newInstance(OnIntent onIntent) {
-        this.onIntent = onIntent ;
+        this.mOnIntent = onIntent ;
     }
 
 
@@ -77,30 +77,19 @@ public class UserFrag extends Fragment {
         Toolbar mToolbar = view.findViewById(R.id.appbar_user) ;
         ((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);
         ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
-//        actionBar.setDisplayHomeAsUpEnabled(true);
-//        actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setTitle(R.string.app_name) ;
-//        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                onBa();
-//            }
-//        });
 
         Initialize(view) ;
-        currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid() ;
+        mCurrentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid() ;
         DBRef = FirebaseDatabase.getInstance().getReference();
-        userRef = DBRef.child("Users");
-        taskRef = DBRef.child("Task").child(currentUserId);
+        mUserRef = DBRef.child("Users");
+        mTaskRef = DBRef.child("Task").child(mCurrentUserId);
 
-        userList = new ArrayList<>() ;
-        userListAdapter = new UserListAdapter(getContext(), userList ) ;
+        mUserList = new ArrayList<>() ;
+        mUserListAdapter = new UserListAdapter(getContext(), mUserList) ;
         mUserAllRV.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
-        mUserAllRV.setAdapter(userListAdapter);
-        userListAdapter.notifyDataSetChanged();
-
-        Log.e("TAG","currentUserId:"+ currentUserId ) ;
-
+        mUserAllRV.setAdapter(mUserListAdapter);
+        mUserListAdapter.notifyDataSetChanged();
 
 
         mFabBtn.setOnClickListener(new View.OnClickListener() {
@@ -114,7 +103,7 @@ public class UserFrag extends Fragment {
             @Override
             public void onClick(View view) {
 
-                onIntent.OnClick(4);
+                mOnIntent.OnClick(4);
 
             }
         });
@@ -122,7 +111,6 @@ public class UserFrag extends Fragment {
         switchCompat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.e("TAG", switchCompat.isChecked()+"") ;
                 if(switchCompat.isChecked()){
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 }else{
@@ -162,20 +150,11 @@ public class UserFrag extends Fragment {
                     hashMap.put("detail",details);
 
                     final String pushId = FirebaseDatabase.getInstance().getReference().push().getKey();
-                    taskRef.child(pushId).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    mTaskRef.child(pushId).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
-                                Log.e("TAG", "task:"+task.isSuccessful()) ;
-                                Log.e("TAG", "currentUserId:"+currentUserId) ;
-
-                                dialog.cancel();
-
-//                            Intent intent = new Intent(ChatProfileActivity.this,MainActivity.class);
-//                            startActivity(intent);
-//                            finish();
-//                            progressDialog.dismiss();
-//                            Toast.makeText(ChatProfileActivity.this,"Profile settings has been updated",Toast.LENGTH_LONG).show();
+                                mAlertDialog.cancel();
                             }
                         }
                     });
@@ -189,9 +168,9 @@ public class UserFrag extends Fragment {
 
 
         materialAlertDialogBuilder.setView(mView);
-        dialog = materialAlertDialogBuilder.create();
-        dialog.show();
-        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        mAlertDialog = materialAlertDialogBuilder.create();
+        mAlertDialog.show();
+        mAlertDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
     }
 
     private void Initialize(View view) {
@@ -215,8 +194,8 @@ public class UserFrag extends Fragment {
     public void onStart() {
         super.onStart();
 
-        userList.clear();
-        userRef.addValueEventListener(new ValueEventListener() {
+        mUserList.clear();
+        mUserRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 mProgress.setVisibility(View.GONE);
@@ -227,7 +206,7 @@ public class UserFrag extends Fragment {
                     String age = postSnapshot.child("age").getValue().toString() ;
                     String date_of_birth = postSnapshot.child("date_of_birth").getValue().toString() ;
 
-                    if(postSnapshot.getKey().equalsIgnoreCase(currentUserId)){
+                    if(postSnapshot.getKey().equalsIgnoreCase(mCurrentUserId)){
                         mAdminCons.setVisibility(View.VISIBLE);
                         mNameTV.setText(name);
                         mEmailTV.setText(email);
@@ -235,23 +214,22 @@ public class UserFrag extends Fragment {
                         mDOBTV.setText("Date of Birth:"+date_of_birth);
                     }else{
                         mAllUserCons.setVisibility(View.VISIBLE);
-                        userList.add(new User(
+                        mUserList.add(new User(
                                 name, email, password, age, date_of_birth
                         )) ;
                     }
 
 
                 }
-                Log.e("TAG","user list:"+ userList.size() ) ;
                 mAllUserCons.setVisibility(View.VISIBLE);
-                if(userList.size() >0){
+                if(mUserList.size() >0){
                     mUserAllRV.setVisibility(View.VISIBLE);
                     mErrorMsgTV.setVisibility(View.GONE);
                 }else{
                     mUserAllRV.setVisibility(View.GONE);
                     mErrorMsgTV.setVisibility(View.VISIBLE);
                 }
-                userListAdapter.notifyDataSetChanged();
+                mUserListAdapter.notifyDataSetChanged();
 
             }
 

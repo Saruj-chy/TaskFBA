@@ -32,8 +32,8 @@ public class SignInFrag extends Fragment {
 
     private FirebaseAuth mAuth;
     private String mCurrentUserId;
-    private FirebaseUser currentUSer ;
-    private ProgressDialog loadingBar;
+    private FirebaseUser mCurrentUSer;
+    private ProgressDialog mLoadingBar;
 
 
     public SignInFrag() {
@@ -51,7 +51,7 @@ public class SignInFrag extends Fragment {
 
         Initialize(view) ;
         mAuth = FirebaseAuth.getInstance();
-        currentUSer = mAuth.getCurrentUser() ;
+        mCurrentUSer = mAuth.getCurrentUser() ;
 
 
         mSignInBtn.setOnClickListener(new View.OnClickListener() {
@@ -81,10 +81,10 @@ public class SignInFrag extends Fragment {
             Toast.makeText(getContext(), "Please enter your password..", Toast.LENGTH_SHORT).show();
         }
         else{
-            loadingBar.setTitle("Sign In");
-            loadingBar.setMessage("Please wait....");
-            loadingBar.setCanceledOnTouchOutside(true);
-            loadingBar.show();
+            mLoadingBar.setTitle("Sign In");
+            mLoadingBar.setMessage("Please wait....");
+            mLoadingBar.setCanceledOnTouchOutside(true);
+            mLoadingBar.show();
 
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -94,7 +94,7 @@ public class SignInFrag extends Fragment {
                                 mCurrentUserId = mAuth.getCurrentUser().getUid() ;
 
                                 mOnIntent.OnClick(3);
-                                loadingBar.cancel();
+                                mLoadingBar.cancel();
 
                             } else{
                                 Toast.makeText(getContext(), "Not Authorized", Toast.LENGTH_SHORT).show();
@@ -111,7 +111,7 @@ public class SignInFrag extends Fragment {
         mSignInBtn = view.findViewById(R.id.btn_sign_in);
         mSIgnUpTV = view.findViewById(R.id.text_sign_up);
 
-        loadingBar = new ProgressDialog(getContext());
+        mLoadingBar = new ProgressDialog(getContext());
 
     }
 }

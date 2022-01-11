@@ -1,6 +1,7 @@
 package com.sd.spartan.taskfba.fragment;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -39,12 +40,13 @@ public class SignUpFrag extends Fragment {
     private TextView mSigninTV, mBofTV;
 
     private String mEMail, mPassword, mName, mConfirmPass, mAge, mBOF, mCurrentId ;
-    private Calendar calendar;
-    private int year, month, day, secID ;
+    private Calendar mCalendar;
+    private int mYear, month, mDay;
 
     private FirebaseAuth mAuth;
-    private DatabaseReference userRef;
-    OnIntent onIntent ;
+    private DatabaseReference mUserRef;
+    private OnIntent mOnIntent;
+    private ProgressDialog mLoadingBar;
 
 
 
@@ -52,7 +54,7 @@ public class SignUpFrag extends Fragment {
     }
 
     public void newInstance(OnIntent onIntent) {
-        this.onIntent = onIntent ;
+        this.mOnIntent = onIntent ;
     }
 
     @Override
@@ -62,7 +64,7 @@ public class SignUpFrag extends Fragment {
 
         Initialize(view) ;
         mAuth = FirebaseAuth.getInstance();
-        userRef = FirebaseDatabase.getInstance().getReference().child("Users");
+        mUserRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
         mSignUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +76,11 @@ public class SignUpFrag extends Fragment {
                 }else if(mBOF.equalsIgnoreCase("") || mAge.equalsIgnoreCase("") || mName.equalsIgnoreCase("")) {
                     Toast.makeText(getContext(), "Please fill up all fields", Toast.LENGTH_SHORT).show();
                 }else{
+                    mLoadingBar.setTitle("Sign In");
+                    mLoadingBar.setMessage("Please wait....");
+                    mLoadingBar.setCanceledOnTouchOutside(true);
+                    mLoadingBar.show();
+
                     mAuth.createUserWithEmailAndPassword(mEMail, mPassword)
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
@@ -111,14 +118,14 @@ OnClickDateTime();
             @Override
             public void onClick(View view) {
 
-                onIntent.OnClick(2);
+                mOnIntent.OnClick(2);
             }
         });
 
-        calendar = Calendar.getInstance();
-        year = calendar.get(Calendar.YEAR);
-        month = calendar.get(Calendar.MONTH);
-        day = calendar.get(Calendar.DAY_OF_MONTH);
+        mCalendar = Calendar.getInstance();
+        mYear = mCalendar.get(Calendar.YEAR);
+        month = mCalendar.get(Calendar.MONTH);
+        mDay = mCalendar.get(Calendar.DAY_OF_MONTH);
 
         return view ;
     }
@@ -132,7 +139,7 @@ OnClickDateTime();
     }
 
     private void SavedDataRDB() {
-        userRef.addValueEventListener(new ValueEventListener() {
+        mUserRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 HashMap<String,Object> profileMap = new HashMap<>();
@@ -142,21 +149,14 @@ OnClickDateTime();
                 profileMap.put("age",mAge);
                 profileMap.put("date_of_birth",mBOF);
 
-                userRef.child(mCurrentId)
+                mUserRef.child(mCurrentId)
                         .setValue(profileMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
-                            Log.e("TAG", "task:"+task) ;
-
-                            onIntent.OnClick(3);
-
-//                            Intent intent = new Intent(ChatProfileActivity.this,MainActivity.class);
-//                            startActivity(intent);
-//                            finish();
-//                            progressDialog.dismiss();
-//                            Toast.makeText(ChatProfileActivity.this,"Profile settings has been updated",Toast.LENGTH_LONG).show();
-                        }
+                            mLoadingBar.cancel();
+                            mOnIntent.OnClick(3);
+   }
                     }
                 });
             }
@@ -169,12 +169,7 @@ OnClickDateTime();
     }
 
     private void OnClickDateTime() {
-        long maxTime = System.currentTimeMillis();
-        long minTime = System.currentTimeMillis() - (3*24*60*60*1000) ;
-        Log.e("date_format", "  maxTime:  "  + maxTime ) ;
-        Log.e("date_format", "  minTime:  "  + minTime ) ;
-
-        DatePickerDialog datepick = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+        DatePickerDialog mDatePick = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
 
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -183,15 +178,11 @@ OnClickDateTime();
                 selectCalendars.set(year, month, dayOfMonth);
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
                 String dateFormat = simpleDateFormat.format(selectCalendars.getTime());
-                Log.e("date_format", "  dateString:  "  + dateFormat ) ;
                 mBofTV.setText(dateFormat);
-
                 mBOF = dateFormat ;
-
-
             }
-        } ,year,month,day);
-        datepick.show();
+        } , mYear,month, mDay);
+        mDatePick.show();
     }
 
     private void Initialize(View view) {
@@ -203,5 +194,8 @@ OnClickDateTime();
         mBofTV = view.findViewById(R.id.text_bof);
         mSignUpBtn = view.findViewById(R.id.btn_sign_up);
         mSigninTV = view.findViewById(R.id.text_sign_in);
+
+        mLoadingBar = new ProgressDialog(getContext());
+
     }
 }
