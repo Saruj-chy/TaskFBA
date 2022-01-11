@@ -31,3 +31,6 @@ This is a task releted firebase based app, where user can sign in and sign up fr
 TaskFBA <a href ="https://github.com/Saruj-chy/TaskFBA/blob/main/app/release/app-release.apk?raw=true" > Apk </a> <br/>
 </p>
 
+# Short Brief
+Users can sign in and sign up from the app. The signup details are stored in Realtime database. In-home Screen, The user profile shows in Cardview and All installed users are shown in recyclerview. Users can add tasks by clicking on add button. When the user clicks on Cardview, the User's own task screen will open and the user can see his/her task list.
+
