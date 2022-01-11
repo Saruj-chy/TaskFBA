@@ -1,12 +1,10 @@
 package com.sd.spartan.taskfba.fragment;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,7 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
@@ -28,8 +25,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.sd.spartan.taskfba.MainActivity;
-import com.sd.spartan.taskfba.OnIntent;
+import com.sd.spartan.taskfba.interfaces.OnIntent;
 import com.sd.spartan.taskfba.R;
 
 import java.text.SimpleDateFormat;
@@ -52,10 +48,12 @@ public class SignUpFrag extends Fragment {
 
 
 
-    public SignUpFrag(OnIntent onIntent) {
-        this.onIntent = onIntent ;
+    public SignUpFrag() {
     }
 
+    public void newInstance(OnIntent onIntent) {
+        this.onIntent = onIntent ;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -145,11 +143,14 @@ OnClickDateTime();
                 profileMap.put("date_of_birth",mBOF);
 
                 userRef.child(mCurrentId)
-                        .updateChildren(profileMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        .setValue(profileMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
                             Log.e("TAG", "task:"+task) ;
+
+                            onIntent.OnClick(3);
+
 //                            Intent intent = new Intent(ChatProfileActivity.this,MainActivity.class);
 //                            startActivity(intent);
 //                            finish();

@@ -1,165 +1,242 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.UserFrag">
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraint_admin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        >
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            android:elevation="@dimen/dimen_4"
-            app:cardUseCompatPadding="true"
-
-            app:cardCornerRadius="@dimen/dimen_10"
-            app:cardElevation="@dimen/dimen_4"
-            >
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/dimen_10"
-                >
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/users_profile_image"
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
-                    android:padding="@dimen/dimen_10"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:src="@drawable/profile_image"/>
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/users_profile_image"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    >
-                    <TextView
-                    android:id="@+id/text_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Admin name"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/dimen_22"
-                        android:textColor="@color/black"
+    <include
+        android:id="@+id/appbar_user"
+        layout="@layout/app_bar_layout"
+        />
 
 
-                    app:layout_constraintTop_toTopOf="parent"
+   <androidx.constraintlayout.widget.ConstraintLayout
+       android:layout_width="match_parent"
+       android:layout_height="0dp"
 
-                    />
-                    <TextView
-                        android:id="@+id/text_email"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Admin Email"
-                        android:textSize="@dimen/dimen_16"
-                        android:textColor="@color/black"
-                        android:paddingStart="@dimen/dimen_20"
-                        android:textStyle="bold"
+       app:layout_constraintTop_toBottomOf="@+id/appbar_user"
+       app:layout_constraintBottom_toBottomOf="parent"
+       >
+       <androidx.constraintlayout.widget.ConstraintLayout
+           android:id="@+id/constraint_admin"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:visibility="gone"
 
-                        app:layout_constraintTop_toBottomOf="@+id/text_name"
-                        app:layout_constraintStart_toStartOf="parent"
-                        />
-                    <TextView
-                        android:id="@+id/text_age"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Admin Age"
-                        android:textSize="@dimen/dimen_12"
-                        android:textColor="@color/black"
-                        android:paddingStart="@dimen/dimen_20"
+           app:layout_constraintTop_toTopOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintEnd_toEndOf="parent"
+           >
 
-                        app:layout_constraintTop_toBottomOf="@+id/text_email"
-                        app:layout_constraintStart_toStartOf="parent"
+           <androidx.cardview.widget.CardView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               app:layout_constraintTop_toTopOf="parent"
+               android:elevation="@dimen/dimen_4"
+               app:cardUseCompatPadding="true"
 
-                        />
-                    <TextView
-                        android:id="@+id/text_dof"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Admin DOF"
-                        android:textSize="@dimen/dimen_12"
-                        android:textColor="@color/black"
-                        android:paddingStart="@dimen/dimen_20"
+               app:cardCornerRadius="@dimen/dimen_10"
+               app:cardElevation="@dimen/dimen_4"
+               >
 
-                        app:layout_constraintTop_toBottomOf="@+id/text_age"
-                        app:layout_constraintStart_toStartOf="parent"
+               <androidx.constraintlayout.widget.ConstraintLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:padding="@dimen/dimen_10"
+                   >
+                   <de.hdodenhof.circleimageview.CircleImageView
+                       android:id="@+id/users_profile_image"
+                       android:layout_width="90dp"
+                       android:layout_height="90dp"
+                       android:padding="@dimen/dimen_10"
+                       app:layout_constraintTop_toTopOf="parent"
+                       app:layout_constraintStart_toStartOf="parent"
+                       android:src="@drawable/profile_image"/>
+                   <androidx.constraintlayout.widget.ConstraintLayout
+                       android:layout_width="0dp"
+                       android:layout_height="wrap_content"
+                       app:layout_constraintTop_toTopOf="parent"
+                       app:layout_constraintStart_toEndOf="@+id/users_profile_image"
+                       app:layout_constraintEnd_toEndOf="parent"
+                       >
+                       <LinearLayout
+                           android:id="@+id/linear_name"
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
 
-                        />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                           android:orientation="horizontal"
+                           app:layout_constraintTop_toTopOf="parent">
 
-        </androidx.cardview.widget.CardView>
+                           <TextView
+                               android:id="@+id/text_name"
+                               android:layout_width="match_parent"
+                               android:layout_height="match_parent"
+                               android:text="Admin name"
+                               android:textStyle="bold"
+                               android:textSize="@dimen/dimen_22"
+                               android:textColor="?attr/colorOnSecondary"
+                               android:gravity="start|center"
 
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraint_all_user"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-
-        app:layout_constraintTop_toBottomOf="@+id/constraint_admin"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        >
-
-        <TextView
-            android:id="@+id/text_installed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Installed User"
-            android:textStyle="bold|italic"
-            android:textSize="@dimen/dimen_20"
-            android:textColor="@color/color_primary"
-            android:paddingHorizontal="@dimen/dimen_10"
-            android:paddingVertical="@dimen/dimen_20"
+                               android:layout_weight="1"
 
 
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            />
+                               app:layout_constraintTop_toTopOf="parent"
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_all_user"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dimen_10"
+                               />
+
+                           <androidx.appcompat.widget.SwitchCompat
+                               android:id="@+id/swich_theme"
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+
+                               android:checked="true"
+                               />
+
+                       </LinearLayout>
 
 
-            app:layout_constraintTop_toBottomOf="@+id/text_installed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+                       <TextView
+                           android:id="@+id/text_email"
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:text="Admin Email"
+                           android:textSize="@dimen/dimen_16"
+                           android:textColor="?attr/colorOnSecondary"
+                           android:paddingStart="@dimen/dimen_20"
+                           android:textStyle="bold"
 
-            />
+                           app:layout_constraintTop_toBottomOf="@+id/linear_name"
+                           app:layout_constraintStart_toStartOf="parent"
+                           />
+                       <TextView
+                           android:id="@+id/text_age"
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:text="Admin Age"
+                           android:textSize="@dimen/dimen_12"
+                           android:textColor="?attr/colorOnSecondary"
+                           android:paddingStart="@dimen/dimen_20"
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                           app:layout_constraintTop_toBottomOf="@+id/text_email"
+                           app:layout_constraintStart_toStartOf="parent"
+
+                           />
+                       <TextView
+                           android:id="@+id/text_dof"
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:text="Admin DOF"
+                           android:textSize="@dimen/dimen_12"
+                           android:textColor="?attr/colorOnSecondary"
+                           android:paddingStart="@dimen/dimen_20"
+
+                           app:layout_constraintTop_toBottomOf="@+id/text_age"
+                           app:layout_constraintStart_toStartOf="parent"
+
+                           />
+                   </androidx.constraintlayout.widget.ConstraintLayout>
+               </androidx.constraintlayout.widget.ConstraintLayout>
+
+           </androidx.cardview.widget.CardView>
+
+
+       </androidx.constraintlayout.widget.ConstraintLayout>
+       <androidx.constraintlayout.widget.ConstraintLayout
+           android:id="@+id/constraint_all_user"
+           android:layout_width="match_parent"
+           android:layout_height="0dp"
+           android:visibility="gone"
+
+           app:layout_constraintTop_toBottomOf="@+id/constraint_admin"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintBottom_toBottomOf="parent"
+           >
+
+           <TextView
+               android:id="@+id/text_installed"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="Installed User"
+               android:textStyle="bold|italic"
+               android:textSize="@dimen/dimen_20"
+               android:textColor="?attr/colorOnSecondary"
+               android:paddingHorizontal="@dimen/dimen_10"
+               android:paddingTop="@dimen/dimen_20"
+
+
+               app:layout_constraintTop_toTopOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintEnd_toEndOf="parent"
+               />
+
+           <androidx.recyclerview.widget.RecyclerView
+               android:id="@+id/recycler_all_user"
+               android:layout_width="match_parent"
+               android:layout_height="0dp"
+               android:layout_margin="@dimen/dimen_10"
+
+
+               app:layout_constraintTop_toBottomOf="@+id/text_installed"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintBottom_toBottomOf="parent"
+
+               />
+
+           <TextView
+               android:id="@+id/text_error"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:visibility="gone"
+               android:text="There are no \n installed User"
+               android:textSize="@dimen/dimen_22"
+               android:textColor="?attr/colorOnSecondary"
+               android:textStyle="bold"
+               android:padding="@dimen/dimen_20"
+
+               android:background="@drawable/border_input"
+
+               app:layout_constraintTop_toBottomOf="@+id/text_installed"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintBottom_toBottomOf="parent"
+
+               />
+
+
+       </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+       <com.google.android.material.floatingactionbutton.FloatingActionButton
+           android:id="@+id/fab_add"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_gravity="bottom|end"
+           android:layout_marginEnd="@dimen/fab_margin"
+           android:layout_marginBottom="@dimen/dimen_10"
+           app:srcCompat="@drawable/ic_baseline_add_24"
+
+           app:layout_constraintBottom_toBottomOf="parent"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           />
+   </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ProgressBar
         android:id="@+id/progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appbar_user"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

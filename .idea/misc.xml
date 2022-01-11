@@ -3,15 +3,25 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android All Project Branch/InternShala Job Project/TaskFBA/app/src/main/res/drawable-v24/border_input.xml" value="0.2212962962962963" />
+        <entry key="..\:/Android All Project Branch/InternShala Job Project/TaskFBA/app/src/main/res/drawable-v24/circle_oval_white.xml" value="0.2212962962962963" />
+        <entry key="..\:/Android All Project Branch/InternShala Job Project/TaskFBA/app/src/main/res/drawable-v24/curbe_toolbar_top.xml" value="0.2212962962962963" />
         <entry key="..\:/Android All Project Branch/InternShala Job Project/TaskFBA/app/src/main/res/drawable-v24/stroke_solid.xml" value="0.22870370370370371" />
         <entry key="..\:/Android All Project Branch/InternShala Job Project/TaskFBA/app/src/main/res/drawable-v24/tab_background.xml" value="0.22870370370370371" />
+        <entry key="..\:/Android All Project Branch/InternShala Job Project/TaskFBA/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.2212962962962963" />
         <entry key="..\:/Android All Project Branch/InternShala Job Project/TaskFBA/app/src/main/res/layout/activity_home.xml" value="0.35260416666666666" />
         <entry key="..\:/Android All Project Branch/InternShala Job Project/TaskFBA/app/src/main/res/layout/activity_main.xml" value="0.18" />
+        <entry key="..\:/Android All Project Branch/InternShala Job Project/TaskFBA/app/src/main/res/layout/activity_main2.xml" value="0.36666666666666664" />
         <entry key="..\:/Android All Project Branch/InternShala Job Project/TaskFBA/app/src/main/res/layout/app_bar_layout.xml" value="0.36666666666666664" />
         <entry key="..\:/Android All Project Branch/InternShala Job Project/TaskFBA/app/src/main/res/layout/fragment_sign_in.xml" value="0.22" />
         <entry key="..\:/Android All Project Branch/InternShala Job Project/TaskFBA/app/src/main/res/layout/fragment_sign_up.xml" value="0.16" />
-        <entry key="..\:/Android All Project Branch/InternShala Job Project/TaskFBA/app/src/main/res/layout/fragment_user.xml" value="0.22" />
+        <entry key="..\:/Android All Project Branch/InternShala Job Project/TaskFBA/app/src/main/res/layout/fragment_task_list.xml" value="0.2" />
+        <entry key="..\:/Android All Project Branch/InternShala Job Project/TaskFBA/app/src/main/res/layout/fragment_user.xml" value="0.2" />
+        <entry key="..\:/Android All Project Branch/InternShala Job Project/TaskFBA/app/src/main/res/layout/layout_switch.xml" value="0.2" />
+        <entry key="..\:/Android All Project Branch/InternShala Job Project/TaskFBA/app/src/main/res/layout/popup_add.xml" value="0.18" />
         <entry key="..\:/Android All Project Branch/InternShala Job Project/TaskFBA/app/src/main/res/layout/user_display_layout.xml" value="0.2" />
+        <entry key="..\:/Android All Project Branch/InternShala Job Project/TaskFBA/app/src/main/res/menu/main.xml" value="0.22" />
+        <entry key="..\:/Android All Project Branch/InternShala Job Project/TaskFBA/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.22037037037037038" />
       </map>
     </option>
   </component>

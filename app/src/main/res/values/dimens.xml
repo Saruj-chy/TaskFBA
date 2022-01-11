@@ -37,4 +37,5 @@
     <dimen name="dimen_400">400sp</dimen>
     <dimen name="dimen_450">450sp</dimen>
     <dimen name="dimen_600">600sp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

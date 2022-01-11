@@ -9,18 +9,20 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sd.spartan.taskfba.R;
-import com.sd.spartan.taskfba.model.User;
+import com.sd.spartan.taskfba.model.Task;
 
 import java.util.List;
 
-public class UserListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+import de.hdodenhof.circleimageview.CircleImageView;
+
+public class TaskListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final Context mCtx;
-    private final List<User> mUserList;
+    private final List<Task> mTaskList;
 
 
-    public UserListAdapter(Context mCtx, List<User> mUserList) {
+    public TaskListAdapter(Context mCtx, List<Task> mTaskList) {
         this.mCtx = mCtx;
-        this.mUserList = mUserList;
+        this.mTaskList = mTaskList;
     }
 
 
@@ -28,34 +30,37 @@ public class UserListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public RecyclerView.ViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mCtx);
         View view = inflater.inflate(R.layout.user_display_layout, null);
-        return new UserListViewHolder(view);
+        return new TaskListViewHolder(view);
     }
 
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
-        User user = mUserList.get(position);
-        ((UserListViewHolder) holder).bind(user);
+        Task task = mTaskList.get(position);
+        ((TaskListViewHolder) holder).bind(task);
     }
 
     @Override
     public int getItemCount() {
-        return mUserList.size();
+        return mTaskList.size();
     }
 
-    static class UserListViewHolder extends RecyclerView.ViewHolder {
+    static class TaskListViewHolder extends RecyclerView.ViewHolder {
         private TextView mNameTV, mEmailTV;
-        public UserListViewHolder(View itemView) {
+        private CircleImageView mImageView;
+        public TaskListViewHolder(View itemView) {
             super(itemView);
 
             mNameTV = itemView.findViewById(R.id.text_name_layout);
             mEmailTV = itemView.findViewById(R.id.text_email_layout);
+            mImageView = itemView.findViewById(R.id.users_profile_image);
         }
 
-        public void bind(User user) {
+        public void bind(Task user) {
 
-            mNameTV.setText(user.getName());
-            mEmailTV.setText(user.getEmail());
+            mNameTV.setText(user.getTitle());
+            mEmailTV.setText(user.getDetail());
+            mImageView.setVisibility(View.GONE);
 
         }
     }
